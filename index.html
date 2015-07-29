@@ -399,7 +399,7 @@
         <script type="text/javascript">
             $(function() { 
          
-            var companyNameTest = [
+            var companyName = [
                 {"label" : "3M", "value" :  1},
                 {"label" : "A.O. Smith", "value" :  2},
                 {"label" : "A.W.Rostamani Holdings Co (L.L.C)", "value" :  3},
@@ -1416,8 +1416,11 @@
             
                 $( "#search_company_list" ).autocomplete({
                   minLength: 1,
-                  max: 10,
-                  source: companyNameTest,
+                  
+                  source: function(request, response) {
+                            var results = $.ui.autocomplete.filter(companyName, request.term);
+                            response(results.slice(0, 10));
+                        },
                   focus: function( event, ui ) {
                     $( "#search_company_list" ).val( ui.item.label );
                     return false;
