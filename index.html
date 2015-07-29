@@ -2,6 +2,8 @@
 <html>
     
     <head>
+        <title>company list</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700' rel='stylesheet' type='text/css' />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
@@ -11,6 +13,7 @@
                 background: #eeeeee;
                 font-size: 13px;
                 font-family: 'Roboto', sans-serif;
+                overflow: auto !important;
             }
             
             ul{
@@ -27,7 +30,6 @@
             
             .container_fluid{
                 width: 100%;
-                overflow: hidden;
                 margin: 0 auto;
             }
             
@@ -117,7 +119,6 @@
                 margin-top: 1px;
                 padding: 6px 14px;
                 transition: all 0.2s linear 0s;
-                display: none;
             }
             
             .content_panel .heading_panel{
@@ -271,12 +272,80 @@
                 color: #fff;
             }
             
+            @media (max-width: 480px) {
+                .container_boxed{
+                    width: auto;
+                }
+                .gn_mr_left{
+                    margin-left: 10px;
+                }
+                .gn_mr_right{
+                    margin-right: 10px;
+                }
+                .search_bar {padding: 6px 0; margin-bottom: 14px;}
+                .search_bar .search_box{
+                    width: auto;
+                }
+                .search_bar .search_box input[type="text"]{
+                    font-size: 17px;
+                }
+                .search_bar .add_btn {
+                    border-radius: 0;
+                    box-shadow: 0 0 2px 0 #888;
+                    float: right;
+                    font-size: 15px;
+                    margin-top: 1px;
+                    padding: 3px 5px 0;
+                }
+                .total_percentage {
+                    font-size: 12px;
+                    line-height: 36px;
+                    position: fixed;
+                    right: 10px;
+                    top: 108px;
+                }
+                ul.list_panel li{
+                    padding: 10px 9px;
+                }
+                ul.list_panel li .s_no {
+                    margin-right: 6px;
+                }
+                ul.list_panel li .s_no{
+                    height: 26px;
+                    width: 26px;
+                    margin-right: 6px;
+                    line-height: 26px;
+                }
+                ul.list_panel li .company_name {
+                    overflow: hidden;
+                    padding: 6px;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    width: 37%;
+                    min-width: auto;
+                }
+                .header_mobile {
+                    left: 0;
+                    position: fixed;
+                    top: 0;
+                    width: 100%;
+                }
+                .content_panel{
+                    margin-top: 116px;
+                }
+                .card {
+                    position: relative;
+                    z-index: 10;
+                }
+            }
+            
         </style>
     </head>
     
     <body>
         <div class="container_fluid">
             
+            <div class="header_mobile">
             <div class="header">
                 <div class="container_boxed">
                     <div class="logo gn_mr_left gn_mr_right">Mckinsey&Company</div>
@@ -296,7 +365,7 @@
                     </div>
                 </div>
             </div><!--/search_bar-->
-            
+            </div>
             <div class="content_panel">
                 <div class="container_boxed">
                     <div class="gn_mr_left gn_mr_right added_company_panel">
@@ -1404,9 +1473,6 @@
                 if(textboxObj.val() <= 0){
                     alert("percentage can not less than 0");
                     return false;
-                } else if(globalCount >= 100){
-                    alert("You have reached to total time spent limit");
-                    return false;
                 } else {
                     var minusVal = parseInt(textboxObj.val()) - 5;
                     textboxObj.val(minusVal);
@@ -1435,6 +1501,10 @@
                    $(item).text(index + 1); 
                 });
             }
+            
+            $(document).on("blur","#company_list_id .percentage_counter input[type='text']",function(){
+                totalPercentageCalculate();
+            });
             
             //total percentage number 
             function totalPercentageCalculate(){
@@ -1465,6 +1535,12 @@
                     });
                 });
             });
+            
+            //responsive component jquery
+            var deviceWidth = $(document).width()
+            if(deviceWidth < 480){
+                $("#add_company_btn").html('<i class="material-icons">add</i>');
+            }
             
         </script>
         
