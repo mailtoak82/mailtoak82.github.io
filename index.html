@@ -1,28 +1,1473 @@
-<!DOCTYPE html>
+<!Doctype html>
 <html>
-	<head>
-		<title>Hank Quinlan, Horrible Cop</title>
-	</head>
-	<body>
-		<nav>
-    		<ul>
-        		<li><a href="/">Home</a></li>
-	        	<li><a href="/about">About</a></li>
-        		<li><a href="/cv">CV</a></li>
-        		<li><a href="/blog">Blog</a></li>
-    		</ul>
-		</nav>
-		<div class="container">
-    		<div class="blurb">
-        		<h1>Hi there, I'm Hank Quinlan!</h1>
-				<p>I'm best known as the horrible cop from <em>A Touch of Evil</em> Don't trust me. <a href="/about">Read more about my life...</a></p>
-    		</div><!-- /.blurb -->
-		</div><!-- /.container -->
-		<footer>
-    		<ul>
-        		<li><a href="mailto:hankquinlanhub@gmail.com">email</a></li>
-        		<li><a href="https://github.com/hankquinlan">github.com/hankquinlan</a></li>
-			</ul>
-		</footer>
-	</body>
+    
+    <head>
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700' rel='stylesheet' type='text/css' />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+        <style type="text/css">
+            *{margin: 0; padding: 0; box-sizing: border-box;font-family: 'Roboto', sans-serif;}
+            body{
+                background: #eeeeee;
+                font-size: 13px;
+                font-family: 'Roboto', sans-serif;
+            }
+            
+            ul{
+                margin: 0; padding: 0; list-style: none;
+            }
+            
+            .pull_left{
+                float: left;
+            }
+            
+            .pull_right{
+                float: right;
+            }
+            
+            .container_fluid{
+                width: 100%;
+                overflow: hidden;
+                margin: 0 auto;
+            }
+            
+            .container_boxed{
+                width: 1024px;
+                overflow: hidden;
+                margin: 0 auto;
+            }
+            
+            .gn_mr_left{
+                margin-left: 15px;
+            }
+            
+            .gn_mr_right{
+                margin-right: 15px;
+            }
+            
+            .header{
+                background: #1976d2;
+                color: #ffffff;
+                height: 57px;
+                line-height: 57px;
+            }
+            
+            .header .logo{
+                font-size: 21px;
+            }
+            
+            .search_bar{
+                background: #fff;
+                box-shadow: 0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23);
+                overflow: hidden;
+                padding: 10px 0px;
+                margin-bottom: 25px;
+                -webkit-box-shadow: 0 8px 6px -6px #aaa;
+                -moz-box-shadow: 0 8px 6px -6px #aaa;
+                box-shadow: 0 8px 6px -6px #aaa;
+            }
+            
+            .search_bar .search_box{float: left; width: 448px;}
+            
+            .search_bar .search_box input[type="text"]{
+                border: 0px solid #eee;
+                color: #777;
+                font-size: 19px;
+                font-weight: 300;
+                height: 36px;
+                line-height: 36px;
+                width: 100%;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+            }
+            
+            textarea:focus, input:focus{
+                outline: 0;
+            }
+            
+            .ui-widget-content {
+                background: #ffffff none repeat scroll 0 0;
+                border: 1px solid #eee;
+                box-shadow: 0 8px 8px #999;
+                color: #222222;
+                margin-top: 20px !important;
+            }
+            
+            
+            .ui-menu .ui-menu-item {
+                font-size: 13px;
+                padding: 10px 13px;
+            }
+            
+            .ui-state-focus {
+                background: #f2f2f2 !important;
+                border: 0 !important;
+                padding: 10px 13px !important;
+            }
+            
+            .search_bar .add_btn{
+	            background: #f44336 none repeat scroll 0 0;
+                border: 0 none;
+                border-radius: 5px;
+                box-shadow: 0 0 2px 0 #888;
+                color: #fff;
+                cursor: pointer;
+                float: left;
+                font-size: 15px;
+                margin-top: 1px;
+                padding: 6px 14px;
+                transition: all 0.2s linear 0s;
+                display: none;
+            }
+            
+            .content_panel .heading_panel{
+                font-size: 15px;
+                color: #888;
+                margin-bottom: 10px;
+            }
+            
+            .card{
+                
+            }
+            
+            ul.list_panel{
+                list-style: none;
+                margin-bottom: 30px;
+                transition: 0.2s linear all;
+            }
+            
+            ul.list_panel li{
+                list-style: none;
+                display: block;
+                padding: 10px 16px;
+                font-size: 13px;
+                background: #fff;
+                -webkit-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+                -moz-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+                box-shadow: 0 1px 0px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+                min-height: 34px;
+                overflow: hidden;
+                transition: 0.2s linear all;
+            }
+            
+            ul.list_panel li .s_no{
+                background: #757575 none repeat scroll 0 0;
+                border-radius: 50%;
+                color: #fff;
+                display: block;
+                float: left;
+                height: 30px;
+                line-height: 30px;
+                margin-right: 19px;
+                text-align: center;
+                width: 30px;
+            }
+            
+            ul.list_panel li .company_name{
+                float: left;
+                min-width: 490px;
+                padding: 6px;
+            }
+            
+            .alert_message{
+                background: #fbe9e7 none repeat scroll 0 0;
+                -webkit-box-shadow: 0 0 4px 0 #ccc;
+                -moz-box-shadow: 0 0 4px 0 #ccc;
+                box-shadow: 0 0 4px 0 #ccc;
+                color: #ff7043;
+                padding: 17px;
+            }
+            
+            ul.list_panel li .percentage_counter{
+                float: left;
+                border: 1px solid #eee;
+            }
+            
+            ul.list_panel li .percentage_counter .plus{
+                border-left: 1px solid #eee;
+                color: #ccc;
+                cursor: pointer;
+                display: block;
+                float: left;
+                height: 28px;
+                line-height: 33px;
+                padding: 2px;
+                width: 30px;
+            }
+            
+            ul.list_panel li .percentage_counter .minus{
+                border-right: 1px solid #eee;
+                color: #ccc;
+                cursor: pointer;
+                display: block;
+                float: left;
+                height: 28px;
+                line-height: 33px;
+                padding: 2px;
+                width: 30px;
+            }
+            
+            ul.list_panel li .percentage_counter input[type="text"]{
+                border: 0 none;
+                color: #666;
+                float: left;
+                font-size: 15px;
+                height: 28px;
+                line-height: 28px;
+                text-align: center;
+                width: 48px;
+            }
+            
+            ul.list_panel li .remove{
+                color: #999;
+                float: right;
+                padding: 2px 5px 0;
+                cursor: pointer;
+            }
+            
+            ul.list_panel li .remove:hover{
+                background: #f2f2f2;
+            }
+            
+            .total_percentage{
+                font-size: 13px;
+                line-height: 36px;
+            }
+            
+            .total_percentage #total_percentage_label{
+                color: #1976d2;
+                float: right;
+                font-size: 27px;
+                font-weight: 300;
+                margin-left: 6px;
+            }
+            
+            .submit_survey_panel{
+                margin-bottom: 30px;
+                margin-top: 10px;
+                text-align: center;
+                display: none;
+            }
+            
+            .submit_survey_panel .submit_survey_btn{
+                border: 1px solid #1976d2;
+                border-radius: 5px;
+                color: #1976d2;
+                font-size: 17px;
+                font-weight: 300;
+                padding: 10px;
+                width: 200px;
+                cursor: pointer;
+                -webkit-transition: 0.2s linear all;
+                -moz-transition: 0.2s linear all;
+                -o-transition: 0.2s linear all;
+                -ms-transition: 0.2s linear all;
+                transition: 0.2s linear all;
+                background: rgba(0,0,0,0);
+            }
+            
+            .submit_survey_panel .submit_survey_btn:hover{
+                background: #1976d2;
+                color: #fff;
+            }
+            
+        </style>
+    </head>
+    
+    <body>
+        <div class="container_fluid">
+            
+            <div class="header">
+                <div class="container_boxed">
+                    <div class="logo gn_mr_left gn_mr_right">Mckinsey&Company</div>
+                </div><!--/container_boxed-->
+            </div><!--/header-->
+            
+            <div class="search_bar">
+                <div class="container_boxed">
+                    <div class="gn_mr_left gn_mr_right">
+                        <div class="search_box">
+                            <input type="text" placeholder="Enter Company name" id="search_company_list" />
+                        </div><!--search_box-->
+                        <button class="add_btn" id="add_company_btn">Add company</button>
+                        <div class="pull_right total_percentage">
+                            Time spent : <span id="total_percentage_label">00</span>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/search_bar-->
+            
+            <div class="content_panel">
+                <div class="container_boxed">
+                    <div class="gn_mr_left gn_mr_right added_company_panel">
+                        <div class="heading_panel">
+                            Companies list
+                        </div>
+                        <div class="added_company_list card">
+                            <div class="alert_message">No company added yet.</div>
+                            <ul class="list_panel" id="company_list_id">
+                                
+                            </ul><!--list-->
+                        </div><!--card-->
+                        
+                        <div class="submit_survey_panel">
+                            <button class="submit_survey_btn" id="submit_survey_btn_id">Submit survey</button>
+                        </div><!--/submit_survey_panel-->
+                        
+                    </div><!--/added_company_panel-->
+                </div>
+            </div><!--/content_panel-->
+            
+            
+            
+        </div><!--/container_fluid-->
+        
+        
+        <!--javascript files-->
+        <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        
+        <script type="text/javascript">
+            
+         $(function() {
+             var companyName = [
+                '3M',
+                'A.O. Smith',
+                'A.W.Rostamani Holdings Co (L.L.C)',
+                'AAR Corp',
+                'ABB',
+                'Abdul Latif Jameel Co.',
+                'Abengoa',
+                'Accuride',
+                'ACS Group',
+                'Actuant Corp',
+                'Acuity Brands',
+                'Aditya Birla',
+                'ADS, Inc.',
+                'Advance Auto Parts',
+                'Advanced Micro',
+                'Advanced Semiconductor Engineering',
+                'AEC - Advanced Electronics Company',
+                'ÅF AB',
+                'Affinia Group',
+                'AGCO',
+                'Agilent Technologies',
+                'Agrale',
+                'Air Works India (Engineering) Private Limited',
+                'Airbus Group',
+                'Aisin Seiki',
+                'Aixtron',
+                'Akebono Brake Industry',
+                'Alaa Industrial Equipment Factory',
+                'Alcoa',
+                'Alfa Laval',
+                'Alfred Kärcher GmbH and Co. KG',
+                'Algeria. Ministry of Defense',
+                'Ali Group',
+                'Allied Electronics Corporation Ltd (Altron)',
+                'Allison Transmission Holdings',
+                'Allseas',
+                'Almaz-Antey',
+                'Alps Electric',
+                'Alstom',
+                'Altera',
+                'Altor Equity Partners',
+                'American Axle & Manufacturing',
+                'American Securities Capital Partners',
+                'American Tire Distributors',
+                'Ametek',
+                'Amkor Technology, Inc.',
+                'Amphenol',
+                'Amtek',
+                'Analog Devices',
+                'Andritz',
+                'Anixter International',
+                'APAX Partners',
+                'Applied Materials',
+                'Arctic Cat Inc',
+                'Ares Management',
+                'Areva',
+                'Argentina. Ministry of Defense',
+                'Arianespace',
+                'Ariens Company',
+                'Arlington Capital Group LLC',
+                'ARM Holdings',
+                'Arrow Electronics',
+                'Asahi Glass',
+                'ASIMCO',
+                'ASML Holding',
+                'Assa Abloy',
+                'Astra International',
+                'Atlas Copco',
+                'Atmel',
+                'ATMI',
+                'AU Optronics',
+                'Aurora Capital Group',
+                'Australia. Department of Defence',
+                'Autoliv',
+                'Automotive Holding Group Limited',
+                'AutoNation',
+                'Autoneum Holding AG',
+                'AUX Group',
+                'Avago Technologies',
+                'AVIC (Aviation Industries of China)',
+                'Avnet',
+                'Avtotor-Kholding Grupp OAO',
+                'AWE Management Limited',
+                'AXA Group',
+                'Ayala Corporation',
+                'Azimut Benetti Group',
+                'B&C Privatstiftung',
+                'Babcock International Group plc',
+                'BAe Systems',
+                'Bain Capital',
+                'Bain Consort./Bombardier Recreational Products',
+                'Ball',
+                'Baoxin Group',
+                'Barnes Group',
+                'Barry-Wehmiller Companies',
+                'BASF',
+                'Battelle Memorial Institute',
+                'Battistella',
+                'BBA Aviation plc',
+                'BE Aerospace',
+                'Becton, Dickinson',
+                'Beechcraft (fka Hawker-Beechcraft)',
+                'Beijing Jingcheng Machinery Electric Holding Co. Ltd',
+                'BeijingAutomotive Industry HoldingCo., Ltd.',
+                'Beiqi Foton',
+                'Belden, Inc.',
+                'Belgium. Flemish Regional Government',
+                'Belgium. Ministry of Defense',
+                'Benchmark Electronics',
+                'Benteler AG',
+                'Bharat Electronics Limited',
+                'Bharat Heavy Electricals',
+                'Bilfinger & Berger',
+                'Bio-Rad Lab',
+                'Blackstone',
+                'BMW Group',
+                'Boeing',
+                'Bombardier',
+                'Bonfiglioli',
+                'Borgers AG',
+                'BorgWarner',
+                'Borusan Holding',
+                'Bosch Siemens Hausgeräte',
+                'Boston Scientific',
+                'Brady Corporation',
+                'Brazil Trading Ltda.',
+                'Brazil. Ministry of Defense',
+                'Brembo',
+                'Bridgepoint',
+                'Bridgestone',
+                'Briggs & Stratton',
+                'Brightpoint, Inc.',
+                'Brilliance China Automotive Holdings',
+                'Brinks',
+                'Broadcom',
+                'Brose Fahrzeugteile',
+                'Brother Industries',
+                'Bruker Corporation',
+                'Brunswick',
+                'Bucher Industries',
+                'Bühler Holding AG',
+                'Business Leaders for Michigan',
+                'BYD',
+                'CACI International',
+                'Cadence',
+                'CAE',
+                'Cal-Comp Electronics (Thailand) Public',
+                'California High Speed Rail',
+                'Calsonic Kansei',
+                'Cameron International',
+                'Camfil Ab',
+                'Camoplast Solideal Inc',
+                'Canada Pension Plan',
+                'Canada. Department of Defence',
+                'Canon',
+                'Caoa Montadora De Veículos S/A.',
+                'CapVis Equity Partners',
+                'Carl Zeiss',
+                'Carlisle Companies',
+                'CarMax',
+                'Carraro Group',
+                'Caterpillar',
+                'CCRE Group',
+                'Celestica, Inc.',
+                'Center for the Advancement of Science in Space',
+                'Centrotherm Photovoltaics AG',
+                'Cerberus Capital Management LP',
+                'Cerberus/Dyncorp International',
+                'Chang An',
+                'Charlesbank Capital Partners Llc',
+                'Cheng Shin Rubber Industries',
+                'Chery Automobile',
+                'China Aerospace Science and Industry Corporation',
+                'China CNR',
+                'China Coal Technology and Engineering Group Corp',
+                'China CSSC Holdings',
+                'China Electronics',
+                'China FAW Group',
+                'China Grand Auto',
+                'China Hi-Tech Group Corporation (CHTC)',
+                'China International Marine',
+                'China National Materials',
+                'China New Century Holding Group',
+                'China North Industries',
+                'China South Industries',
+                'China Zhengtong Auto Services Holdings',
+                'China Hengtian GroupCo. Ltd',
+                'China. Peoples Republic of',
+                'Chint Group Co. Ltd',
+                'Chongqing Skyman',
+                'Chun Feng Group',
+                'CIE Automotive SA',
+                'Cinven',
+                'Citizen Watch',
+                'CK Birla Group',
+                'CLAAS KGaA mbH',
+                'Clarcor',
+                'CNH Industrial',
+                'Cobham',
+                'Coesia',
+                'Colfax Corporation',
+                'Colombia. Defense',
+                'Colony Capital',
+                'Commercial Vehicle Group Inc. (CVG)',
+                'Comoli-Bianchi Group',
+                'Compagnie Plastic Omnium SA',
+                'Compal Electronics',
+                'Conexant Systems',
+                'Consórcio Estaleiro Paraguaçú',
+                'Construcciones y Auxiliar de Ferrocarril (CAF)',
+                'Continental AG',
+                'Controladora Mabe, S.A. de C.V.',
+                'Cooper Tire & Rubber',
+                'Cooper-Standard Automotive',
+                'Coretronic',
+                'Corning',
+                'Corporación Gestamp',
+                'COSCO',
+                'Crane Co',
+                'Cree, Inc.',
+                'Crown Equipment',
+                'CSR Corporation Limited',
+                'CSR plc',
+                'Cubic Corp',
+                'Cummins',
+                'Curtiss-Wright Corporation',
+                'Cypress Semiconductor',
+                'Dabbagh Group (incl. Stars Foundation)',
+                'Daewoo Ship & Marine',
+                'Dah Chong Hong',
+                'Dai Nippon Printing',
+                'Daido Steel',
+                'Daikin Industries',
+                'Daimler',
+                'Daiwabo Holdings',
+                'Dana',
+                'Danaher',
+                'Danfoss',
+                'Danieli and C. Officine Meccaniche S.p.A.',
+                'Dassault Group',
+                'DCNS S.A.',
+                'De Longhi S.p.A.',
+                'Deere & Co',
+                'Dekra',
+                'Delixi Group Co. Ltd',
+                'Delphi',
+                'Delta Electronics',
+                'Denmark. Ministry of Defense',
+                'Denso',
+                'Derco Sa',
+                'Deutz AG',
+                'Deutz/Fahr (SAME Deutz-Fahr)',
+                'Dialog Semiconductor',
+                'Diebold',
+                'Diehl',
+                'DIeteren SA',
+                'DMG Mori Seiki',
+                'Docol',
+                'Dogus Holding (incl. Dogus Media)',
+                'Dometic',
+                'Donaldson Company, Inc.',
+                'Dongfang Electric',
+                'Dongfeng Motor Group',
+                'Doosan',
+                'Doosan Heavy Industry',
+                'Dover',
+                'DPaschoal',
+                'Dramd Participações E Administração Ltda',
+                'DRB / Syed Mokhtar',
+                'Dream LuxCo/Securitas',
+                'Dresser-Rand Group',
+                'Dura Automotive Systems',
+                'Dürr Aktiengesellschaft',
+                'East Penn Manufacturing Company, Inc.',
+                'Eastman Kodak',
+                'Eaton',
+                'Ebara',
+                'ebm-papst',
+                'Ecolab (incl. Nalco)',
+                'El Sewedy Electric',
+                'Elbit',
+                'Electrical Components International, Inc.',
+                'Electrolux Group',
+                'Elliott Management Corporation',
+                'Elmos Semiconductor',
+                'Elpida Memory',
+                'Elringklinger',
+                'Embraer',
+                'Emcor',
+                'Emerson Electric',
+                'Emil Frey',
+                'Ence',
+                'EnerSys, Inc.',
+                'Engility Holdings, Inc.',
+                'EnPro Industries',
+                'Entegris',
+                'Envision Energy (Jiangyin) Co. Ltd.',
+                'EPISTAR Corporation',
+                'Equifax',
+                'ESCO Technologies Inc.',
+                'Escorts Ltd.',
+                'Esterline Technologies Corp.',
+                'Eurofighter Jagdflugzeug Gmbh',
+                'EUROJET Turbo GmbH',
+                'Exelis',
+                'Exide',
+                'Exostar Llc',
+                'Fahrzeug-Werke LUEG AG',
+                'Fairchild Semiconductor International',
+                'Fanuc',
+                'Faurecia',
+                'FCC Co Ltd',
+                'Federal-Mogul',
+                'Ferretti Group',
+                'Ferreycorp Sociedad Anónima Abierta',
+                'Ferrostaal GmbH',
+                'Festo Maschinenfabrik',
+                'Fiat Group (incl. Chrysler)',
+                'Ficosa',
+                'Fincantieri',
+                'Finland. Ministry of Defense',
+                'Finmeccanica',
+                'Firestone Holdings LLC',
+                'First Solar, Inc.',
+                'FleetPride, Inc.',
+                'Flex-n-gate',
+                'Flextronics Intl',
+                'FLIR Systems',
+                'Flowserve',
+                'FLSmidth and Co. A/S',
+                'Fluor',
+                'FMC Technologies',
+                'Fokker Technologies Group B.V.',
+                'Ford Motor',
+                'Ford Sollers',
+                'Forjas Taurus S.A.',
+                'Foshan Midea Carrier',
+                'FountainVest',
+                'France. Defense',
+                'Franke Holding',
+                'Freescale Semiconductor',
+                'Fresenius',
+                'Freudenberg',
+                'Friedhelm Loh Stiftung and Co. KG',
+                'Friedrich Boysen Holding GmbH',
+                'Fuji Electric Holdings',
+                'Fuji Heavy Inds',
+                'Fujikura',
+                'Fujitsu',
+                'Funai Electric',
+                'Furukawa Electric',
+                'Futaba Industrial',
+                'Fuyo General Lease',
+                'Galanz Group',
+                'Gamesa',
+                'Gardner Denver',
+                'GAZ Group',
+                'GD Midea Holding',
+                'GEA Group',
+                'Geberit',
+                'Geely (incl. Volvo Car)',
+                'GenCorp',
+                'General Atomics',
+                'General Cable Corporation',
+                'General Dynamics',
+                'General Electric',
+                'General Motors',
+                'Genuine Parts',
+                'Georg Fischer',
+                'Germany. Ministry Of Defense',
+                'GETRAG Getriebe- und Zahnradfabrik Hermann Hagenmeyer GmbH and Cie KG',
+                'Ghabbour Auto',
+                'GICAN',
+                'Giovanni Agnelli (incl. EXOR)',
+                'GKN',
+                'Goldberg Lindsay & Co. Llc',
+                'Goldman Sachs Group',
+                'Goodyear',
+                'GrafTech International Ltd',
+                'Grauer & Weil',
+                'Graybar Electric',
+                'Great Wall Motor',
+                'Great Wall Technology',
+                'Gree Electric Appliances',
+                'Group 1 Automotive',
+                'Group Industrial Alfa',
+                'Grundfos',
+                'Grupo Antolin',
+                'Grupo Berge',
+                'Grupo IUSA, S.A. de C.V.',
+                'Grupo Kuo, S.A.B. de C.V.',
+                'GS Yuasa',
+                'Guangxi Construction Engineering GroupCo., Ltd.',
+                'Guangxi Liugong Machinery',
+                'Guangxi Yuchai Machinery Group Co.Ltd',
+                'Guangzhou Automobile',
+                'GUANGZHOU RAILWAY',
+                'GuangzhouWanbao GroupCo. Ltd',
+                'Gulf States Toyota',
+                'GV Holding',
+                'Haas-Meincke Holding A/S',
+                'Hahn & Company Korea Limited',
+                'Haier Group',
+                'Halla Visteon Climate Control (HVCC)',
+                'Hangzhou Rubber Group Company',
+                'Hanil E-hwa',
+                'Hankook Tire',
+                'Hanwha (excl Life & Chemicals)',
+                'Harbour Group',
+                'Harley-Davidson',
+                'Harman International',
+                'Harris',
+                'Harsco Corporation',
+                'Havells India Limited',
+                'HAWE Hydraulik SE',
+                'HD Supply',
+                'Hebei Construction Group Co., LTd.',
+                'Heidelberg Druckmaschinen',
+                'Hella KG & Hueck',
+                'Hengtong Group Co. Ltd',
+                'Hero MotoCorp',
+                'Hexagon',
+                'Hexcel Corporation',
+                'Hilti',
+                'Hinduja Group',
+                'Hindustan Aeronautics Ltd.',
+                'Hisense Electric',
+                'Hitachi',
+                'Hixih Rubber Industry GroupCo. Ltd',
+                'Hon Hai Precision Ind (dba Foxconn)',
+                'Honda Motor',
+                'Honeywell International',
+                'Hoshiden',
+                'HOYA',
+                'Hubbell, Inc.',
+                'Huntington Ingalls Industries Inc.',
+                'Husky Injection Molding',
+                'Husqvarna Vapenfabriks Ab',
+                'Hyosung',
+                'Hyster-Yale Materials Handling, Inc.',
+                'Hyundai Heavy Industries',
+                'Hyundai Mipo Dockyard Co., Ltd.',
+                'Hyundai Mobis',
+                'Hyundai Motor',
+                'Ibf - Indústria Brasileira De Filmes S/A',
+                'Ibiden',
+                'IDEX Corporation',
+                'IHI',
+                'Illinois Tool Works',
+                'IMA S.p.A.',
+                'Imabari Shipbuilding Co.,Ltd.',
+                'IMEC',
+                'Impala SAS',
+                'Inchcape',
+                'Indesit',
+                'India. Ministry of Defense',
+                'Indra',
+                'Infineon Technologies',
+                'Ingersoll-Rand',
+                'Ingram Micro',
+                'Innovation Network Corporation of Japan',
+                'Insight Enterprises',
+                'Inspur Electronic Information Industry Co.,Ltd',
+                'Intel',
+                'International Automotive Components',
+                'International Rectifier Corporation',
+                'Interpump Group SpA',
+                'Invensys',
+                'Investor AB',
+                'Iochpe-Maxion S.A.',
+                'Israel Aerospace Industries',
+                'Israel Corp',
+                'Israel. Defense Forces',
+                'Isuzu Motors',
+                'Italy. Ministry of Defence',
+                'Itavema S/A',
+                'Itron',
+                'ITT',
+                'J Eberspächer',
+                'J. C. Bamford',
+                'Jabil Circuit',
+                'JAC Motors',
+                'JALUX Inc.',
+                'Japan Display',
+                'Japan. Government of',
+                'Japan. Ministry of Defense',
+                'JBS',
+                'Jebsen Group',
+                'Jenoptik',
+                'JFE Holdings',
+                'JFL Partners',
+                'Jim Pattison',
+                'Jinglong Industry and Commerce Group Co., Ltd.',
+                'JM Family Enterprises',
+                'Johnson Controls',
+                'Johnson Matthey',
+                'Joule Unlimited',
+                'Joy Global',
+                'JTEKT',
+                'Juffali',
+                'Jungheinrich',
+                'Kaba Holding',
+                'Kaman Corporation',
+                'KAMAZ OJSC',
+                'KATHREIN-Werke KG',
+                'Kawasaki Heavy Inds',
+                'Kayaba Industry',
+                'Keihin Corp',
+                'Kemet Corporation',
+                'Kennametal',
+                'Keppel',
+                'Khrunichev State Research and Production Space Center',
+                'Kia Motors',
+                'Kimball International',
+                'Kingboard Chemical',
+                'Kingston Technology',
+                'KION GROUP GmbH',
+                'KKR',
+                'KLA-Tencor',
+                'Knorr-Bremse Aktiengesellschaft',
+                'Koç (incl. Arcelik)',
+                'Koenig and Bauer AG',
+                'Koito Manufacturing',
+                'Komatsu',
+                'KONE',
+                'Konecranes Plc',
+                'Kongsberg Gruppen ASA',
+                'Konica Minolta',
+                'Körber AG',
+                'Korea Aerospace Industries Ltd.',
+                'Krauss-Maffei Wegmann GmbH and Co. KG',
+                'Krones AG',
+                'KSB AG',
+                'KSJ Group',
+                'KTM Sportmotorcycle AG',
+                'Kubota',
+                'KUKA Aktiengesellschaft (IWKA)',
+                'Kulicke & Soffa',
+                'Kumho Tire Co., Inc.',
+                'Kyocera',
+                'L-3 Communications Holding',
+                'LabCorp',
+                'Lam Research',
+                'Landis+Gyr Holding AG',
+                'Lantiq',
+                'Larsen & Toubro',
+                'Latecoere',
+                'Lear',
+                'Legend Holdings Limited',
+                'Legrand',
+                'Leidos',
+                'Lennox International',
+                'Lenze SE',
+                'LEONI AG',
+                'Lexmark',
+                'LG Chem',
+                'LG Corp',
+                'LG Electronics',
+                'LG Innotek.',
+                'LG International',
+                'Liebherr',
+                'Linamar Corp.',
+                'Lincoln Electric',
+                'Linde Group',
+                'Linear Technology',
+                'Lisa Dräxlmaier GmbH',
+                'LIXIL Group Corp.',
+                'LKQ Corporation',
+                'Lockheed Martin',
+                'Loral Space & Communications',
+                'LS Corp',
+                'LSH',
+                'M+W Group',
+                'Ma Laboratories',
+                'MAGNA International',
+                'Mahindra & Mahindra',
+                'Mahle-Behr',
+                'Mainfirst Holding Ag',
+                'Makita',
+                'MAN',
+                'Mando',
+                'Manitowoc',
+                'Mann+Hummel',
+                'Mansour Group',
+                'ManTech International',
+                'Marcopolo S.A.',
+                'Mark IV LLC',
+                'Marshall of Cambridge (Holdings) Limited',
+                'Marvell Technology Group',
+                'Masco',
+                'Maxim Integrated Products',
+                'Mazda Motor',
+                'MBK Partners',
+                'McDermott International',
+                'MediaTek',
+                'Medtronic',
+                'Meggitt plc',
+                'Mentor Graphics',
+                'Meritor',
+                'Metalsa S. de R.L.',
+                'Metso',
+                'Mettler-Toledo International',
+                'Mexico. Secretariat of Defense',
+                'Meyer Burger AG',
+                'MI.MO.SE.SPA',
+                'Michelin Group',
+                'Microchip Technology',
+                'Micron Technology',
+                'Micronas Holding GmbH',
+                'Miele and Cie. KG',
+                'Mikron',
+                'Miller Electric',
+                'Minebea',
+                'Mitsubishi Electric',
+                'Mitsubishi Heavy Inds',
+                'Mitsubishi Motors',
+                'Mitsui Engineering & Ship',
+                'Modine Manufacturing',
+                'Molex Incorporated',
+                'Mondragon',
+                'Monument Capital Group',
+                'Moog, Inc.',
+                'Mosaid Technologies Incorporated',
+                'MRC Global Inc.',
+                'MRF Ltd',
+                'MSC Industrial Direct',
+                'MTS Systems Corporation',
+                'MTU Euro Engines',
+                'Mubadala Corporation',
+                'Mueller Water Products',
+                'Multivac',
+                'Murata Manufacturing',
+                'MV Agusta',
+                'NAC',
+                'Nacco Industries, Inc.',
+                'Naghi Group',
+                'NASA',
+                'National Instruments',
+                'Navantia',
+                'Navistar Intl',
+                'NCR',
+                'NEC',
+                'Netherlands. Defense',
+                'NETS',
+                'Nexans',
+                'Nexter Systems (fmr GIAT Industries)',
+                'NGK Spark Plug',
+                'NHK Spring',
+                'Nichia Corporation',
+                'Nidec',
+                'Nikon',
+                'Nippon Electric Glass',
+                'Nissan Shatai Co., Ltd.',
+                'Nisshinbo Industries',
+                'NKT Holding A/S',
+                'Nordex SE',
+                'Nordson Corporation',
+                'Norma Group',
+                'Nortek, Inc.',
+                'North Atlantic Treaty Organization - NATO',
+                'Northrop Grumman',
+                'Norway. Ministry of Defense',
+                'Norwest Equity Partners',
+                'NOW GMBH',
+                'NSK',
+                'NTN',
+                'Nvidia',
+                'NXP Semiconductors',
+                'Oaktree Capital Management',
+                'Oerlikon Buhrle',
+                'OJSC Research and production corporation UralVagonZavod',
+                'Oki Electric Industry Company',
+                'Okuma',
+                'Omni United (S) Pte. Ltd.',
+                'Omron',
+                'OMZ Uralmash-Izhora Group OJSC',
+                'ON Semiconductor Corporation',
+                'Onex',
+                'Opple Lighting Co., Ltd.',
+                'Orbital ATK',
+                'Oshkosh Corporation',
+                'OSRAM Licht',
+                'Otsuka Corporation',
+                'Outerwall Inc',
+                'Outotec Oyj',
+                'Owens Corning',
+                'Oy Partek (Cargotec)',
+                'Paccar',
+                'Paladin Capital Group',
+                'Pall Corporation',
+                'Panasonic',
+                'Pang Da Automobile Trade',
+                'Parker-Hannifin',
+                'Pegatron',
+                'Penske Automotive',
+                'Pentair',
+                'PERI',
+                'PerkinElmer',
+                'Peru. Defense',
+                'Philips',
+                'Piaggio',
+                'Pioneer',
+                'Pirelli & C',
+                'Pitney Bowes',
+                'Plastal',
+                'PLexus Corp',
+                'PMC-Sierra',
+                'Poland. Ministry of Defense',
+                'Polaris Industries',
+                'Pon Holdings B.V.',
+                'Portugal. Ministry of Defense',
+                'Positivo Informatica',
+                'Possehl',
+                'Power M',
+                'PPG Industries',
+                'PRAJ Industries Ltd',
+                'Praxair',
+                'Precision Castparts',
+                'Preh GmbH',
+                'Primax Electronics',
+                'Prosegur',
+                'Prysmian SpA',
+                'PSA Peugeot Citroen S.A.',
+                'PV Automotive GmbH',
+                'QinetiQ',
+                'Qoros',
+                'Qorvo',
+                'Qualcomm',
+                'Quanta Computer',
+                'Radici',
+                'Rane Ltd',
+                'Raytheon',
+                'Red Eléctrica',
+                'Regal-Beloit Corp.',
+                'Rejsekort A/S',
+                'Remy International',
+                'Renault Nissan',
+                'Renesas Electronics',
+                'Renold',
+                'REPH',
+                'Rexam Healthcare Packaging Inc.',
+                'Rexel',
+                'Rexnord',
+                'Rheinmetall',
+                'Rieter',
+                'RMA Group',
+                'Robert Bosch',
+                'Rockwell Automation',
+                'Rockwell Collins',
+                'Rockwool',
+                'Rohm',
+                'Rolls-Royce Group',
+                'Roper Industries',
+                'Rosatom',
+                'Rosoboronexport',
+                'Rostec',
+                'RPG Enterprises',
+                'RUAG',
+                'Russia. Defense',
+                'Saab AB',
+                'Sacmi Group',
+                'SAFRAN',
+                'SAG Group GmbH',
+                'SAIC Motor',
+                'Saipem',
+                'Samsung Electro-Mech',
+                'Samsung Heavy Industries',
+                'Samsung SDI',
+                'Samsung Techwin',
+                'Samyang',
+                'SanDisk',
+                'Sandvik',
+                'Sanitec',
+                'Sanmina-SCI',
+                'Sany Heavy Industry',
+                'Saudi Arabia. Defense',
+                'Scania',
+                'ScanSource, Inc.',
+                'Schaeffler Group',
+                'Schindler Holding',
+                'Schmitz Cargobull',
+                'Schneider Electric',
+                'Schott AG',
+                'SCREEN',
+                'Seagate Technology',
+                'Sealed Air',
+                'SEB SA',
+                'Sequa Corp',
+                'Serco Group',
+                'Serviço Nacional De Aprendizagem Industrial - Senai',
+                'Severstal',
+                'SEW Eurodrive',
+                'Shaanxi Automobile Group Co. Ltd',
+                'Shandong Heavy Industry',
+                'Shandong Shifeng (Group) Co. Ltd',
+                'Shanghai Electric Group',
+                'Shenyang YuandaEnterprise Group Co.Ltd',
+                'Sherwin-Williams',
+                'Shimadzu Corp.',
+                'Shimano',
+                'Shin-Etsu Chemical',
+                'Sichuan Changhong Electric',
+                'Siemens',
+                'Sierra Nevada Corporation',
+                'Singapore Technologies',
+                'Singapore. Defense',
+                'Sinomach',
+                'Sinotruk',
+                'Sinquest Pte Ltd',
+                'SK Holdings Co., Ltd',
+                'SKF Group',
+                'Skyworks Solutions',
+                'Skyworth Digital',
+                'SMC',
+                'Smiths Group',
+                'SMS Group',
+                'Snap-on Incorporated',
+                'Sogefi',
+                'Solaris Bus & Coach S A',
+                'Solidium Oy',
+                'Sollers',
+                'Sonepar S.A.',
+                'Sonic Automotive',
+                'Sotreq',
+                'South Korea. Government of',
+                'South Korea. Ministry of National Defense',
+                'Space Exploration Technologies Corp.',
+                'Spain. Defense',
+                'Spansion Inc',
+                'Spirit AeroSystems Holdings Inc.',
+                'SPX',
+                'SR Technics Switzerland AG',
+                'St Jude Medical',
+                'Stadler Rail Group',
+                'Stanley Black & Decker',
+                'Stanley Electric',
+                'Steelcase Inc.',
+                'Stihl Holding AG and Co. KG',
+                'STMicroElectronics',
+                'Stork B.V.',
+                'Sulzer',
+                'Sumco',
+                'Sumitomo Electric',
+                'Sumitomo Heavy Industries',
+                'Sumitomo Rubber',
+                'Sun Capital Partners',
+                'SunEdison',
+                'Sungwoo Hitech',
+                'Suspensys',
+                'Suzlon Energy',
+                'Suzuki Motor',
+                'Svenska fordonkomponengruppen',
+                'Sweden. Defense',
+                'Switzerland. Eidgenossiches Militar / Departement',
+                'Synopsys',
+                'Tactical Missiles Corporation JSC',
+                'Taiwan Semiconductor',
+                'Taiwan. Defense',
+                'Taiyo Yuden',
+                'Tata (excl Motor, Steel & Power)',
+                'Tata Motors',
+                'Tatung',
+                'TDK',
+                'TE Connectivity',
+                'Technip',
+                'Technogym',
+                'Technolatina',
+                'Tecnicas Reunidas',
+                'Teledyne Technologies, Inc.',
+                'Teleflex, Inc.',
+                'Temasek Holding',
+                'Tenneco',
+                'Teradyne',
+                'Terex Corporation',
+                'Terma',
+                'Terra Firma Capital Partners Ltd',
+                'Tetra Laval',
+                'Texas Instruments',
+                'Textron',
+                'Thales',
+                'The Carlyle Group',
+                'The MITRE Corporation',
+                'The New Motion B.V',
+                'Thermax',
+                'Thermo Fisher',
+                'Thomas H Lee',
+                'Thor Industries',
+                'ThyssenKrupp Group',
+                'TianjinZhonghuan Electronics Information GroupCo.Ltd',
+                'Timken',
+                'TKJ Corporation',
+                'Tokai Rika Co., Ltd.',
+                'Tokai Rubber Industries',
+                'Tokyo Electron',
+                'Tomkins plc',
+                'TomTom',
+                'Toppan Printing',
+                'Toshiba',
+                'Tower International',
+                'Toyo Tire & Rubber',
+                'Toyoda Gosei Co., Ltd.',
+                'Toyota Boshoku',
+                'Toyota Industries',
+                'Toyota Motor',
+                'Toyota Tsusho',
+                'TPG Capital',
+                'TPV Technology',
+                'Tramontina',
+                'Transmashholding ZAO',
+                'Trelleborg AB',
+                'Triad Semiconductor',
+                'Trimble Navigation Ltd',
+                'Trinity Industries',
+                'Triumph Group',
+                'Trost Auto Service Technik SE',
+                'Trumpf',
+                'TRW Automotive Hldgs',
+                'TS TECH Co., Ltd.',
+                'Tsinghua Tongfang',
+                'TT Electronics',
+                'TTM Technologies',
+                'Tupy S.A.',
+                'Turkey. Undersecretary of Defense',
+                'Tüv Süd AG',
+                'TVS (incl. Sundram Fasteners)',
+                'Tyco International',
+                'UAE. Defense',
+                'UK. Ministry of Defence',
+                'UKC Holdings Corporation',
+                'Ukraine. Government of',
+                'Ultra Electronics Holdings plc',
+                'Ulvac',
+                'UMW Holdings Bhd',
+                'Underwriters Laboratories Inc.',
+                'United Aircraft Corp. JSC',
+                'United Launch Alliance',
+                'United MicroElectronics (UMC)',
+                'United Rentals',
+                'United Space Alliance',
+                'United Technologies',
+                'Upstream Capital Management',
+                'US. Department of Defense',
+                'Vaillant Group',
+                'Valeo',
+                'Valmet',
+                'Varian Medical Systems',
+                'Veeco',
+                'VeriFone Systems Inc',
+                'Veritas Capital Management',
+                'Vestas Wind Systems',
+                'Vestel Elektronik Sanayi Ve Ticaret AS',
+                'Videocon Industries Limited',
+                'Viessmann Werke GmbH and Co. KG',
+                'ViewSonic',
+                'Vishay Intertechnology',
+                'Visteon',
+                'VKR Holding A/S',
+                'Voith',
+                'Volkswagen Group (incl. Porsche)',
+                'Volvo Group',
+                'Vossloh AG',
+                'WABCO Holdings',
+                'Wabtec',
+                'Wacker Chemie',
+                'Walsin Lihwa Corporation',
+                'Wanfeng Auto Holding Group',
+                'Wanxiang Group',
+                'Warburg Pincus',
+                'Wärtsilä',
+                'Waters',
+                'Watsco, Inc.',
+                'Watts Water Technologies, Inc.',
+                'Webasto',
+                'WEG',
+                'Weichai Power',
+                'Wendel',
+                'Western Digital',
+                'Whirlpool',
+                'Wilo SE',
+                'Wincor Nixdorf',
+                'Wirtgen Group',
+                'Wistron',
+                'Wlr Recovery Associates',
+                'Wolong Holding Group Co., Ltd.',
+                'Wolseley',
+                'Woodward, Inc.',
+                'WPG Holdings',
+                'Wulong Group',
+                'Würth Group',
+                'WW Grainger',
+                'XCMG Construction Machinery',
+                'Xilinx',
+                'Xylem, Inc.',
+                'Yamaha Motor',
+                'Yanmar Co., Ltd.',
+                'Yaskawa Electric',
+                'Yazaki Corporation',
+                'YKK Corporation',
+                'Yokogawa Electric',
+                'Yokohama Rubber',
+                'Yongda Auto Group',
+                'York Capital Management/Kaupthing Bank',
+                'Zeppelin Stiftung',
+                'Zhejiang Commercial Group Corporation',
+                'Zhejiang Materials',
+                'Zhengzhou Yutong Bus',
+                'Zhongsheng Group Holdings Ltd',
+                'Zilor de Almeida Santos',
+                'Zodiac Aerospace SA',
+                'Zoomlion Heavy Industry',
+                'Zorlu Holding A.S.',
+                'Zumtobel'
+            ];
+            
+                $( "#search_company_list" ).autocomplete({
+                     source: function(request, response) {
+                                var results = $.ui.autocomplete.filter(companyName, request.term);
+                                response(results.slice(0, 10));
+                     },
+                      select: function( event, ui ) {
+                          $("#add_company_btn").show();
+                      }
+                });
+                 
+            });
+            
+            $( "#search_company_list" ).val('');
+            var globalCount = 0;
+            
+            $(document).on("click", "#add_company_btn", function(){
+                 var company_value = $( "#search_company_list" ).val(), 
+                     list_items = $("#company_list_id li");
+                 
+                //check if company value is null
+                if(company_value === "") {
+                     alert("Please select a company");
+                     return false;
+                 } else if(globalCount >= 100){
+                     alert("You have reached to total time spent limit");
+                     return false;
+                 } else{
+                      $(".alert_message").slideUp();
+                      $("#company_list_id").append('<li> <div class="s_no">' + (list_items.length + 1) + '</div> <div class="company_name">' + company_value + '</div>' + '<div class="percentage_counter"><span class="minus"><i class="material-icons">remove</i></span><input type="text" value="5" /><span class="plus"><i class="material-icons">add</i></span></div><div class="remove"><i class="material-icons">delete</i></div>' + '</li>');
+                      $( "#search_company_list" ).val('');
+                      $('.submit_survey_panel').show();
+                      totalPercentageCalculate();
+                      return false;
+                 }
+            });
+            
+            //plus counter 
+            $(document).on("click", "#company_list_id li span.plus", function(){
+                var textboxObj = $(this).prev('input[type="text"]');
+                if(textboxObj.val() >= 100){
+                    alert("you have reached to maximum limit");
+                    return false;
+                } else if(globalCount >= 100){
+                    alert("You have reached to total time spent limit");
+                    return false;
+                } else{
+                    var plusVal = parseInt(textboxObj.val()) + 5;
+                    textboxObj.val(plusVal);
+                    totalPercentageCalculate();
+                    return false;
+                }
+            });
+            
+            //minus counter 
+            $(document).on("click", "#company_list_id li span.minus", function(){
+                var textboxObj = $(this).next('input[type="text"]');
+                if(textboxObj.val() <= 0){
+                    alert("percentage can not less than 0");
+                    return false;
+                } else if(globalCount >= 100){
+                    alert("You have reached to total time spent limit");
+                    return false;
+                } else {
+                    var minusVal = parseInt(textboxObj.val()) - 5;
+                    textboxObj.val(minusVal);
+                    totalPercentageCalculate();
+                    return false;
+                }
+            });
+            
+            //delete row
+            $(document).on("click", "#company_list_id li .remove", function(){
+                var myObj = $(this).closest('li');
+                myObj.hide('slow',function(){ myObj.remove(); rearrangeNumbers(); totalPercentageCalculate();});
+                totalPercentageCalculate();
+                return false;
+            });
+            
+            //rearrange numbers of list
+            function rearrangeNumbers(){
+                console.log("rearrange number");
+                var sNoObj = $("#company_list_id li .s_no");
+                if(sNoObj.length == 0) {
+                    $('.alert_message').slideDown();
+                    $('.submit_survey_panel').hide();
+                }
+                $.map(sNoObj, function(item, index){
+                   $(item).text(index + 1); 
+                });
+            }
+            
+            //total percentage number 
+            function totalPercentageCalculate(){
+                var total = 0;
+                var all_count_numbers = $("#company_list_id li .percentage_counter input");
+                for(var i = 0; i < all_count_numbers.length; i++) {
+                     total = total + parseInt($(all_count_numbers[i]).val());
+                }
+                globalCount = total
+                if(globalCount > 100){
+                    alert("You time spent limit can not exceed 100");
+                    return false;
+                }
+                $("#total_percentage_label").text(total);
+                return false;
+            }
+            
+            
+            //Make json on submit survey
+            var jsonArrayFinal = [];
+            $(document).on("click", "#submit_survey_btn_id", function(){
+                jsonArrayFinal = [];
+                var companylist = $("#company_list_id li");
+                $.map(companylist, function(item,index){
+                    jsonArrayFinal.push({
+                        companyName : $(item).children('.company_name').text(),
+                        timeSpent : $(item).children('.percentage_counter').children('input').val()
+                    });
+                });
+            });
+            
+        </script>
+        
+    </body>
+    
 </html>
