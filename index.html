@@ -1416,27 +1416,26 @@
             
                 $( "#search_company_list" ).autocomplete({
                   minLength: 1,
-                  
                   source: function(request, response) {
                             var results = $.ui.autocomplete.filter(companyName, request.term);
                             response(results.slice(0, 10));
                         },
                   focus: function( event, ui ) {
                     $( "#search_company_list" ).val( ui.item.label );
+                    $("#search_company_list").attr("data-code",ui.item.value);
                     return false;
                   },
                   select: function( event, ui ) {
+                    
                     return false;
                   }
                 })
                 .autocomplete( "instance" )._renderItem = function( ul, item ) {
-                  
                   return $( "<li>" )
                     .append( "<a>" + item.label + "</a>" )
                     .appendTo( ul );
                 };
 
-                    
             });
             
             $( "#search_company_list" ).val('');
@@ -1444,8 +1443,14 @@
             
             $(document).on("click", "#add_company_btn", function(){
                  var company_value = $( "#search_company_list" ).val(), 
-                     list_items = $("#company_list_id li");
-                 
+                     code_value = $( "#search_company_list" ).attr("data-code"), 
+                     list_items = $("#company_list_id li"),
+                     company_codes = $("#company_list_id .company_name");
+                
+                var company_code_array = $.map(company_codes, function(item, index) {
+                     return $(item).attr("data-code");
+                });
+                
                 //check if company value is null
                 if(company_value === "") {
                      alert("Please select a company");
@@ -1453,9 +1458,12 @@
                  } else if(globalCount >= 100){
                      alert("You have reached to total time spent limit");
                      return false;
+                 } else if(company_code_array.indexOf(code_value) != -1){
+                     alert("Company already added");
+                     return false;
                  } else{
                       $(".alert_message").slideUp();
-                      $("#company_list_id").append('<li> <div class="s_no">' + (list_items.length + 1) + '</div> <div class="company_name">' + company_value + '</div>' + '<div class="percentage_counter"><span class="minus"><i class="material-icons">remove</i></span><input type="text" value="5" /><span class="plus"><i class="material-icons">add</i></span></div><div class="remove"><i class="material-icons">delete</i></div>' + '</li>');
+                      $("#company_list_id").append('<li> <div class="s_no">' + (list_items.length + 1) + '</div> <div class="company_name" data-code="' + code_value + '">' + company_value + '</div>' + '<div class="percentage_counter"><span class="minus"><i class="material-icons">remove</i></span><input type="text" value="5" /><span class="plus"><i class="material-icons">add</i></span></div><div class="remove"><i class="material-icons">delete</i></div>' + '</li>');
                       $( "#search_company_list" ).val('');
                       $('.submit_survey_panel').show();
                       totalPercentageCalculate();
@@ -1544,6 +1552,7 @@
                 $.map(companylist, function(item,index){
                     jsonArrayFinal.push({
                         companyName : $(item).children('.company_name').text(),
+                        companyCode : $(item).children('.company_name').attr("data-code"),
                         timeSpent : $(item).children('.percentage_counter').children('input').val()
                     });
                 });
