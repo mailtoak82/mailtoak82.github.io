@@ -381,6 +381,7 @@
                         
                         <div class="submit_survey_panel">
                             <button class="submit_survey_btn" id="submit_survey_btn_id">Submit survey</button>
+                            <input type="text" id="qjson" style="display: none;" />
                         </div><!--/submit_survey_panel-->
                         
                     </div><!--/added_company_panel-->
@@ -1557,13 +1558,37 @@
                         timeSpent : $(item).children('.percentage_counter').children('input').val()
                     });
                 });
+                $("#qjson").val(JSON.stringify(jsonArrayFinal));
             });
+            
+            
             
             //responsive component jquery
             var deviceWidth = $(document).width()
             if(deviceWidth < 480){
                 $("#add_company_btn").html('<i class="material-icons">add</i>');
             }
+            
+            var testjson = [
+                    { companyName:"A.O. Smith",  companyCode:"2",  timeSpent:"30"},
+                    { companyName:"new company",  companyCode:"3",  timeSpent:"5"},
+                    { companyName:"AAR Corp",  companyCode:"4",  timeSpent:"5"},
+                    { companyName:"ABB",  companyCode:"5",  timeSpent:"5"}
+                ];
+                       
+            $("#qjson").val(JSON.stringify(testjson));
+            
+            var qjson_data = JSON.parse( $("#qjson").val() );
+            
+            $.map(qjson_data, function(item, index) {
+              $(".alert_message").slideUp();
+              $("#company_list_id").append('<li> <div class="s_no">' + (index + 1) + '</div> <div class="company_name" data-code="' + item.timeSpent + '">' + item.companyName + '</div>' + '<div class="percentage_counter"><span class="minus"><i class="material-icons">remove</i></span><input type="text" value="' + item.timeSpent + '" /><span class="plus"><i class="material-icons">add</i></span></div><div class="remove"><i class="material-icons">delete</i></div>' + '</li>');
+              $( "#search_company_list" ).val('');
+              $('.submit_survey_panel').show();
+              totalPercentageCalculate();
+              return false;
+            });
+            
             
         </script>
         
