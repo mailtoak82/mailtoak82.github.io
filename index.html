@@ -1460,6 +1460,7 @@
                      return false;
                  } else if(company_code_array.indexOf(code_value) != -1){
                      alert("Company already added");
+                     $( "#search_company_list" ).val('');
                      return false;
                  } else{
                       $(".alert_message").slideUp();
