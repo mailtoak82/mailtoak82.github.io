@@ -352,7 +352,7 @@
                     <div class="container_boxed">
                         <div class="gn_mr_left gn_mr_right">
                             <div class="search_box">
-                                <input type="text" placeholder="Enter Company name" id="search_company_list" />
+                                <input type="text" placeholder="Enter Company name" id="search_company_list" data-code="0" />
                             </div><!--search_box-->
                             <button class="add_btn" id="add_company_btn">Add company</button>
                             <div class="pull_right total_percentage">
@@ -1419,11 +1419,11 @@
                         },
                   focus: function( event, ui ) {
                     $( "#search_company_list" ).val( ui.item.label );
-                    $("#search_company_list").attr("data-code",ui.item.value);
                     return false;
                   },
                   select: function( event, ui ) {
-                    
+                    $( "#search_company_list" ).val( ui.item.label );
+                    $("#search_company_list").attr("data-code",ui.item.value);
                     return false;
                   }
                 })
@@ -1439,15 +1439,18 @@
             var globalCount = 0;
             
             $(document).on("click", "#add_company_btn", function(){
-                debugger;
                  var company_value = $( "#search_company_list" ).val(), 
                      code_value = $( "#search_company_list" ).attr("data-code"), 
                      list_items = $("#company_list_id li"),
                      company_codes = $("#company_list_id .company_name");
-                
+                     
                 var company_code_array = $.map(company_codes, function(item, index) {
-                     return $(item).attr("data-code");
+                     if($(item).attr("data-code") !== "0"){
+                         return $(item).attr("data-code");
+                     }
                 });
+                
+                console.log(company_code_array);
                 
                 //check if company value is null
                 if(company_value === "") {
@@ -1459,11 +1462,13 @@
                  } else if(company_code_array.indexOf(code_value) != -1){
                      alert("Company already added");
                      $( "#search_company_list" ).val('');
+                     $( "#search_company_list" ).attr("data-code","0");
                      return false;
                  } else{
                       $(".alert_message").slideUp();
                       $("#company_list_id").append('<li> <div class="s_no">' + (list_items.length + 1) + '</div> <div class="company_name" data-code="' + code_value + '">' + company_value + '</div>' + '<div class="percentage_counter"><span class="minus"><i class="material-icons">remove</i></span><input type="text" value="5" /><span class="plus"><i class="material-icons">add</i></span></div><div class="remove"><i class="material-icons">delete</i></div>' + '</li>');
                       $( "#search_company_list" ).val('');
+                      $( "#search_company_list" ).attr("data-code","0");
                       $('.submit_survey_panel').show();
                       totalPercentageCalculate();
                       return false;
@@ -1544,7 +1549,13 @@
             
             
             //Make json on submit survey
-            var jsonArrayFinal = [];
+            var jsonArrayFinal = [],
+                company_code_array = [],
+                time_spent_array = [],
+                isotherExist = false,
+                otherCompany_array = [],
+                sum_other_company_time = 0;
+                    
             $(document).on("click", "#submit_survey_btn_id", function(){
                 jsonArrayFinal = [];
                 var companylist = $("#company_list_id li");
@@ -1556,7 +1567,34 @@
                     });
                 });
                 $("#qjson").val(JSON.stringify(jsonArrayFinal));
+                
+                //make company name and timespent array
+                    company_code_array = [];
+                    time_spent_array = [];
+                    isotherExist = false;
+                    otherCompany_array = [];
+                    sum_other_company_time = 0;
+                    
+                $.map(jsonArrayFinal, function(item,index){
+                    
+                    if(item.companyCode == "0"){
+                        isotherExist = true;
+                        otherCompany_array.push(item.timeSpent);
+                    } else{
+                        company_code_array.push(item.companyCode);
+                        time_spent_array.push(item.timeSpent);
+                    }
+                });
+                
+                if(isotherExist == true) {
+                    $.map(otherCompany_array, function(item,index) {
+                        sum_other_company_time = parseInt(item) + sum_other_company_time;
+                    });
+                    company_code_array.push("0");
+                    time_spent_array.push(sum_other_company_time.toString());
+                }
             });
+            
             
             //responsive component jquery
             var deviceWidth = $(document).width()
@@ -1573,8 +1611,8 @@
                        
             $("#qjson").val(JSON.stringify(testjson));
             
+            //Show pre selected list from textbox json
             var qjson_data = JSON.parse( $("#qjson").val() );
-            
             $.map(qjson_data, function(item, index) {
               $(".alert_message").slideUp();
               $("#company_list_id").append('<li> <div class="s_no">' + (index + 1) + '</div> <div class="company_name" data-code="' + item.companyCode + '">' + item.companyName + '</div>' + '<div class="percentage_counter"><span class="minus"><i class="material-icons">remove</i></span><input type="text" value="' + item.timeSpent + '" /><span class="plus"><i class="material-icons">add</i></span></div><div class="remove"><i class="material-icons">delete</i></div>' + '</li>');
@@ -1583,6 +1621,9 @@
               totalPercentageCalculate();
               return false;
             });
+            
+            
+            
             
             
         </script>
