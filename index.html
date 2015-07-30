@@ -126,11 +126,7 @@
                 color: #888;
                 margin-bottom: 10px;
             }
-            
-            .card{
-                
-            }
-            
+                      
             ul.list_panel{
                 list-style: none;
                 margin-bottom: 30px;
@@ -1443,6 +1439,7 @@
             var globalCount = 0;
             
             $(document).on("click", "#add_company_btn", function(){
+                debugger;
                  var company_value = $( "#search_company_list" ).val(), 
                      code_value = $( "#search_company_list" ).attr("data-code"), 
                      list_items = $("#company_list_id li"),
@@ -1561,8 +1558,6 @@
                 $("#qjson").val(JSON.stringify(jsonArrayFinal));
             });
             
-            
-            
             //responsive component jquery
             var deviceWidth = $(document).width()
             if(deviceWidth < 480){
@@ -1582,7 +1577,7 @@
             
             $.map(qjson_data, function(item, index) {
               $(".alert_message").slideUp();
-              $("#company_list_id").append('<li> <div class="s_no">' + (index + 1) + '</div> <div class="company_name" data-code="' + item.timeSpent + '">' + item.companyName + '</div>' + '<div class="percentage_counter"><span class="minus"><i class="material-icons">remove</i></span><input type="text" value="' + item.timeSpent + '" /><span class="plus"><i class="material-icons">add</i></span></div><div class="remove"><i class="material-icons">delete</i></div>' + '</li>');
+              $("#company_list_id").append('<li> <div class="s_no">' + (index + 1) + '</div> <div class="company_name" data-code="' + item.companyCode + '">' + item.companyName + '</div>' + '<div class="percentage_counter"><span class="minus"><i class="material-icons">remove</i></span><input type="text" value="' + item.timeSpent + '" /><span class="plus"><i class="material-icons">add</i></span></div><div class="remove"><i class="material-icons">delete</i></div>' + '</li>');
               $( "#search_company_list" ).val('');
               $('.submit_survey_panel').show();
               totalPercentageCalculate();
